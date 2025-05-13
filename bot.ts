@@ -13,7 +13,7 @@ const bot = mineflayer.createBot({
 })
 
 bot.loadPlugin(tpsplugin);
-
+//mineflayerViewer(bot, { port: 50, firstPerson: true });
 bot.on("chat", (username, message) => {
     if (username === bot.username) return;
     if (message === "tps") {
@@ -25,18 +25,19 @@ bot.on("chat", (username, message) => {
     }
     bot.setControlState('forward', true); // Move forward
     setTimeout(() => bot.clearControlStates(), 250);
-    console.log("Bot has logged in");
-    console.log(username,"message:", message);
 });
+
+bot.on("message", (jsonMsg) => {
+    console.log("[System] [CHAT]", jsonMsg.toString()); // Log the message to the console
+});
+
 bot.on('login', () => {
     bot.chat(password);
     console.log("Password sent");
 });
 
 bot.on('spawn', () => {
-
     console.log("Bot has spawned");
-    //mineflayerViewer(bot, { port: 50, firstPerson: true });
 });
 
 bot.on('kicked', console.log)
