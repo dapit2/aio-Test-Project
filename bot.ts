@@ -1,7 +1,7 @@
 import mineflayer from "mineflayer";
 var tpsplugin = require('mineflayer-tps')(mineflayer)
 const mineflayerViewer = require('prismarine-viewer').mineflayer
-var password = '/login serverbt';
+var password = '/login t';
 var tpa = '/tpa exdv';
 
 const bot = mineflayer.createBot({
