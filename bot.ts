@@ -1,6 +1,6 @@
 import mineflayer from "mineflayer";
 var tpsplugin = require('mineflayer-tps')(mineflayer)
-//import { mineflayer as mineflayerViewer } from "prismarine-viewer";
+const mineflayerViewer = require('prismarine-viewer').mineflayer
 var password = '/login serverbt';
 var tpa = '/tpa exdv';
 
@@ -13,7 +13,7 @@ const bot = mineflayer.createBot({
 })
 
 bot.loadPlugin(tpsplugin);
-//mineflayerViewer(bot, { port: 50, firstPerson: true });
+
 bot.on("chat", (username, message) => {
     if (username === bot.username) return;
     if (message === "tps") {
@@ -28,6 +28,9 @@ bot.on("chat", (username, message) => {
 });
 
 bot.on("message", (jsonMsg) => {
+    if (jsonMsg.toString() == "tps") {
+        bot.chat("CURRENT TPS: " + bot.getTps());
+    }
     console.log("[System] [CHAT]", jsonMsg.toString()); // Log the message to the console
 });
 
@@ -37,7 +40,12 @@ bot.on('login', () => {
 });
 
 bot.on('spawn', () => {
-    console.log("Bot has spawned");
+    try {
+        //mineflayerViewer(bot, { firstPerson: true, port: 500 });
+        console.log("Viewer initialized on port 50");
+    } catch (error) {
+        console.error("Failed to initialize viewer:", error);
+    }
 });
 
 bot.on('kicked', console.log)
